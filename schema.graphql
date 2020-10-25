@@ -1,0 +1,44 @@
+type Course {
+  id: ID!
+  title: String
+  url: String
+  short_description: String
+  content: String
+  video_embed: String
+  image_url: String
+  available: Boolean
+  lessons: [Lesson]
+}
+
+type Lesson {
+  id: ID!
+  title: String
+  url: String
+  short_description: String
+  content: String
+  video_embed: String
+  image_url: String
+  available: Boolean
+}
+
+type Query {
+  allCourses: [Course]
+  course(id: ID!): Course
+  courses(title: String, short_description: String, content: String, available: Boolean): [Course]
+  allLessons: [Lesson]
+  lesson(id: ID!): Lesson
+  lessons(title: String, short_description: String, content: String, available: Boolean): [Lesson]
+}
+
+type Mutation {
+  addCourse(
+    id: ID!, 
+    title: String
+    url: String,
+    short_description: String,
+    content: String,
+    video_embed: String,
+    image_url: String,
+    available: Boolean,
+  ): Course!
+}

@@ -8,4 +8,4 @@ A simple Apollo GraphQL API for managing course/lesson content to display on mul
 ## Installation
 1. `cd {PROJECT-DIR} && npm install`
 2. `npm run start`
-3. view graphql playground at http://localhost:4020
+3. view graphql playground at http://localhost:4000
