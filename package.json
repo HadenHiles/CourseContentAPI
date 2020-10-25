@@ -1,0 +1,27 @@
+{
+  "name": "course-content-api",
+  "version": "1.0.0",
+  "description": "A simple Apollo GraphQL API for managing the content of courses and lessons",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HadenHiles/CourseContentAPI.git"
+  },
+  "author": "Haden Hiles (https://github.com/HadenHiles/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HadenHiles/CourseContentAPI/issues"
+  },
+  "homepage": "https://github.com/HadenHiles/CourseContentAPI#readme",
+  "dependencies": {
+    "apollo-server": "^2.18.2",
+    "graphql": "^15.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
