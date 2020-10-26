@@ -42,3 +42,9 @@ type Mutation {
     available: Boolean,
   ): Course!
 }
+
+type CourseResponse {
+  success: Boolean!
+  message: String
+  course: Course
+}
