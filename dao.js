@@ -57,7 +57,7 @@ module.exports = {
       } else {
         // get the id of the inserted course
         db.get("SELECT last_insert_rowid() as id", function (err, row) {
-          module.exports.course(row['id'], (res) => {
+          module.exports.course(row["id"], (res) => {
             cb(res);
           });
         });
@@ -87,6 +87,42 @@ module.exports = {
         console.error(err);
       } else {
         cb(rows);
+      }
+    });
+  },
+
+  // Create a lesson
+  createLesson: ({ title, url, shortDescription, content, videoEmbed, imageUrl, available }, cb) => {
+    var sql = `INSERT INTO lessons (
+        title, 
+        url, 
+        short_description, 
+        content, 
+        video_embed, 
+        image_url, 
+        available
+        ) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+
+    var params = [
+      title,
+      url == null ? "" : url,
+      shortDescription == null ? "" : shortDescription,
+      content == null ? "" : content,
+      videoEmbed == null ? "" : videoEmbed,
+      imageUrl == null ? "" : imageUrl,
+      available == null ? false : available,
+    ];
+
+    db.run(sql, params, (err, row) => {
+      if (err) {
+        console.error(err);
+      } else {
+        // get the id of the inserted course
+        db.get("SELECT last_insert_rowid() as id", function (err, row) {
+          module.exports.lesson(row["id"], (res) => {
+            cb(res);
+          });
+        });
       }
     });
   },

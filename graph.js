@@ -31,7 +31,7 @@ module.exports = {
       },
       lessons: (parent, args, context, info) => {
         dao.lessons((res) => {
-          resolverResult = res;
+          resolverResult = module.exports.mapCourses(res); // TODO: Creat separate mapLessons method if necessary
         });
 
         var tempRes = resolverResult;
@@ -42,6 +42,14 @@ module.exports = {
       createCourse: (parent, args, context, info) => {
         dao.createCourse(args, (res) => {
           resolverResult = module.exports.mapCourse(res);
+        });
+
+        var tempRes = resolverResult;
+        return tempRes;
+      },
+      createLesson: (parent, args, context, info) => {
+        dao.createLesson(args, (res) => {
+          resolverResult = module.exports.mapCourse(res); // TODO: create separate mapLesson method if necessary
         });
 
         var tempRes = resolverResult;
