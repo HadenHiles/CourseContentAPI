@@ -1,50 +1,51 @@
 type Course {
-  id: ID!
-  title: String
+  id: Int!
+  title: String!
   url: String
-  short_description: String
+  shortDescription: String
   content: String
-  video_embed: String
-  image_url: String
+  videoEmbed: String
+  imageUrl: String
   available: Boolean
   lessons: [Lesson]
 }
 
-type Lesson {
-  id: ID!
-  title: String
-  url: String
-  short_description: String
-  content: String
-  video_embed: String
-  image_url: String
-  available: Boolean
+type GenericResponse {
+  success: Boolean
 }
 
-type Query {
-  allCourses: [Course]
-  course(id: ID!): Course
-  courses(title: String, short_description: String, content: String, available: Boolean): [Course]
-  allLessons: [Lesson]
-  lesson(id: ID!): Lesson
-  lessons(title: String, short_description: String, content: String, available: Boolean): [Lesson]
+type Lesson {
+  id: Int!
+  title: String!
+  url: String
+  shortDescription: String
+  content: String
+  videoEmbed: String
+  imageUrl: String
+  available: Boolean
+  courses: [Course]
 }
 
 type Mutation {
-  addCourse(
-    id: ID!, 
-    title: String
-    url: String,
-    short_description: String,
-    content: String,
-    video_embed: String,
-    image_url: String,
-    available: Boolean,
-  ): Course!
+  createCourse(title: String!, url: String, shortDescription: String, content: String, videoEmbed: String, imageUrl: String, available: Boolean): Course
+  updateCourse(id: Int, title: String, url: String, shortDescription: String, content: String, videoEmbed: String, imageUrl: String, available: Boolean): Course
+  deleteCourse(id: Int!): GenericResponse
+  addCourseToLesson(id: Int!, lessonId: Int!): GenericResponse
+  removeCourseFromLesson(id: Int!, lessonId: Int!): GenericResponse
+  createLesson(title: String!, url: String, shortDescription: String, content: String, videoEmbed: String, imageUrl: String, available: Boolean): Lesson
+  updateLesson(id: Int, title: String, url: String, shortDescription: String, content: String, videoEmbed: String, imageUrl: String, available: Boolean): Lesson
+  deleteLesson(id: Int!): GenericResponse
+  addLessonToCourse(id: Int!, courseId: Int!): GenericResponse
+  removeLessonFromCourse(id: Int!, courseId: Int!): GenericResponse
 }
 
-type CourseResponse {
-  success: Boolean!
-  message: String
-  course: Course
+type Query {
+  courses: [Course]
+  course(
+    id: Int
+  ): Course
+  lessons: [Lesson]
+  lesson(
+    id: Int
+  ): Lesson
 }

@@ -1,0 +1,27 @@
+CREATE TABLE IF NOT EXISTS courses (
+    id INTEGER NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    url TEXT,
+    short_description TEXT,
+    content TEXT,
+    video_embed TEXT,
+    image_url TEXT,
+    available BOOLEAN
+);
+
+CREATE TABLE IF NOT EXISTS lessons (
+    id INTEGER NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    url TEXT,
+    short_description TEXT,
+    content TEXT,
+    video_embed TEXT,
+    image_url TEXT,
+    available BOOLEAN
+);
+
+CREATE TABLE IF NOT EXISTS course_lessons (
+    id INTEGER NOT NULL PRIMARY KEY,
+    course_id INTEGER NOT NULL UNIQUE,
+    lesson_id INTEGER NOT NULL UNIQUE
+);
