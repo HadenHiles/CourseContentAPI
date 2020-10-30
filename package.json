@@ -5,8 +5,7 @@
   "type": "module",
   "main": "./server/server.js",
   "scripts": {
-    "start": "nodemon ./client/index.js || nodemon ./server/server.js",
-    "client": "nodemon ./client/index.js",
+    "client": "cd ./client && npm run start",
     "server": "nodemon ./server/server.js"
   },
   "repository": {
@@ -20,7 +19,6 @@
   },
   "homepage": "https://github.com/HadenHiles/CourseContentAPI#readme",
   "dependencies": {
-    "@apollo/client": "^3.2.5",
     "apollo-server": "^2.18.2",
     "dotenv": "^8.2.0",
     "graphql": "^15.4.0",
