@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "A simple Apollo GraphQL API for managing the content of courses and lessons",
   "type": "module",
-  "main": "index.js",
+  "main": "./server/server.js",
   "scripts": {
-    "start": "nodemon ./server.js"
+    "start": "nodemon ./client/index.js || nodemon ./server/server.js",
+    "client": "nodemon ./client/index.js",
+    "server": "nodemon ./server/server.js"
   },
   "repository": {
     "type": "git",
@@ -18,10 +20,13 @@
   },
   "homepage": "https://github.com/HadenHiles/CourseContentAPI#readme",
   "dependencies": {
+    "@apollo/client": "^3.2.5",
     "apollo-server": "^2.18.2",
     "dotenv": "^8.2.0",
-    "graphql": "^15.3.0",
+    "graphql": "^15.4.0",
     "graphql-import": "^1.0.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {

@@ -1,8 +1,8 @@
 // Setup the sqlite database connection
 const sqlite3 = require("sqlite3").verbose();
 const fs = require("fs"); // for reading retrieving the schema file
-const dbSchema = fs.readFileSync(`./coursecontent.schema`).toString();
-const dbPath = "./coursecontent.db";
+const dbSchema = fs.readFileSync(`./server/coursecontent.schema`).toString();
+const dbPath = "./server/coursecontent.db";
 
 const db = new sqlite3.Database(dbPath, function (err) {
   if (err) {

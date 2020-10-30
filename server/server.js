@@ -8,7 +8,7 @@ var resolvers = graph.resolvers;
 
 // Import the graphql type definitions from the schema file
 const { importSchema } = require("graphql-import");
-const typeDefs = importSchema(`./schema.graphql`);
+const typeDefs = importSchema(`./server/schema.graphql`);
 
 // Initialize the ApolloServer with the GraphQL type definitions and resolvers
 const server = new ApolloServer({ typeDefs, resolvers });
