@@ -1,30 +1,19 @@
 # Course Content API
-A simple Apollo GraphQL API for managing course/lesson content to display on multiple platforms
+An apollo-graphql-api using sqlite3 and React for managing basic multiplatform course content.
 
 ## Prerequisites
 [Node.js](https://nodejs.org/) v12.x or later  
 [npm](https://www.npmjs.com/) v6.x or later
 
 ## Installation
-1. `npm install || cd ./client && npm install`
-2. In separate terminals run `npm run server` & `npm run client` respectively
-3. view [graphql playground](http://localhost:4000) & [react app](http://localhost:3000)
+1. Clone repository
+2. `cd CourseContentAPI`
+3. `npm install && cd ./client && npm install`
+4. In separate terminals run `npm run server` & `npm run client` respectively
+5. View [graphql playground](http://localhost:4000) & [react app](http://localhost:3000)
 
-### Example Query
-```graphql
-{
-  courses {
-    id,
-    title,
-    url,
-    shortDescription,
-    content,
-    videoEmbed,
-    imageUrl,
-    available
-  }
-}
-```
+## Issues
+There may be [unresolved issues](https://github.com/HadenHiles/CourseContentAPI/issues) that could cause unexpected behaviour, please review prior to running the project.
 
 ### Example Mutation
 ```graphql
@@ -37,6 +26,22 @@ mutation {
     content
     videoEmbed
     imageUrl
+    available
+  }
+}
+```
+
+### Example Query
+```graphql
+{
+  courses {
+    id,
+    title,
+    url,
+    shortDescription,
+    content,
+    videoEmbed,
+    imageUrl,
     available
   }
 }
