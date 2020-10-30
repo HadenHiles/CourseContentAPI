@@ -1,12 +1,10 @@
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
 import { ApolloClient, InMemoryCache, ApolloProvider, useQuery, gql } from "@apollo/client";
 
 const client = new ApolloClient({
@@ -29,29 +27,14 @@ const COURSES = gql`
   }
 `;
 
-function Courses() {
-  const { loading, error, data } = useQuery(COURSES);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-  if (error) {
-    return <p>Error :O</p>;
-  }
-
-  return data.courses.map(({ id, title, url, short_description: shortDescription, content, video_embed: videoEmbed, image_url: imageUrl, available }) => (
-    CourseCard(title, url, shortDescription, content, videoEmbed, imageUrl, available)
-  ));
-}
-
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
   },
   bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)",
   },
   title: {
     fontSize: 14,
@@ -61,15 +44,22 @@ const useStyles = makeStyles({
   },
 });
 
-function CourseCard(title, url, shortDescription, content, videoEmbed, imageUrl, available) {
+function Courses() {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
+  const { loading, error, data } = useQuery(COURSES);
 
-  return (
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (error) {
+    return <p>Error :O</p>;
+  }
+
+  return data.courses.map(({ id, title, url, shortDescription, content, videoEmbed, imageUrl, available }) => (
     <Card className={classes.root}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          <a href="{url}">{url}</a>
+          <a href={url}>{url}</a>
         </Typography>
         <Typography variant="h5" component="h2">
           {title}
@@ -83,25 +73,27 @@ function CourseCard(title, url, shortDescription, content, videoEmbed, imageUrl,
           {imageUrl}
         </Typography>
       </CardContent>
-      <CardActions>
-        Available: {available ? "Yes" : "No"}
-      </CardActions>
+      <CardActions>Available: {available ? "Yes" : "No"}</CardActions>
     </Card>
-  );
+  ));
 }
 
 function App() {
+  const classes = useStyles();
+
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h6" className={classes.title}>
-          Course Manager
-        </Typography>
-      </Toolbar>
-    </AppBar>
+    <div>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            Course Manager
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <ApolloProvider client={client}>
+        <Courses />
+      </ApolloProvider>
+    </div>
   );
 }
 
