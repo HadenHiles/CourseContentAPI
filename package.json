@@ -2,7 +2,7 @@
   "name": "course-content-api",
   "version": "1.0.0",
   "description": "A simple Apollo GraphQL API for managing the content of courses and lessons",
-  "type": "module",
+  "type": "commonjs",
   "main": "./server/server.js",
   "scripts": {
     "client": "cd ./client && npm run start",
