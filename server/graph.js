@@ -47,6 +47,19 @@ module.exports = {
         var tempRes = resolverResult;
         return tempRes;
       },
+      updateCourse: (parent, args, context, info) => {
+        dao.updateCourse(args, (res) => {
+          resolverResult = module.exports.mapCourse(res);
+        });
+
+        var tempRes = resolverResult;
+        return tempRes;
+      },
+      deleteCourse: (parent, { id }, context, info) => {
+        dao.deleteCourse(id, (res) => {
+          resolverResult = module.exports.mapSuccess(res);
+        });
+      },
       createLesson: (parent, args, context, info) => {
         dao.createLesson(args, (res) => {
           resolverResult = module.exports.mapCourse(res); // TODO: create separate mapLesson method if necessary
@@ -54,6 +67,19 @@ module.exports = {
 
         var tempRes = resolverResult;
         return tempRes;
+      },
+      updateLesson: (parent, args, context, info) => {
+        dao.updateLesson(args, (res) => {
+          resolverResult = module.exports.mapCourse(res);
+        });
+
+        var tempRes = resolverResult;
+        return tempRes;
+      },
+      deleteLesson: (parent, { id }, context, info) => {
+        dao.deleteLesson(id, (res) => {
+          resolverResult = module.exports.mapSuccess(res);
+        });
       },
     },
   },
@@ -75,5 +101,12 @@ module.exports = {
       });
 
       return c;
-  }
+  },
+  // For mapping a simple success/fail response
+  mapSuccess: (o) => {
+    o.success = o.success;
+    delete o.success;
+
+    return o;
+  },
 };

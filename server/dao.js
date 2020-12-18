@@ -65,6 +65,41 @@ module.exports = {
     });
   },
 
+  // Update a course
+  updateCourse: ({ id, title, url, shortDescription, content, videoEmbed, imageUrl, available }, cb) => {
+    var sql = `UPDATE courses SET
+          title = ?,
+          url = ?, 
+          short_description = ?, 
+          content = ?, 
+          video_embed = ?, 
+          image_url = ?, 
+          available = ?
+        WHERE id = ?`;
+
+    var params = [
+      title,
+      url == null ? "" : url,
+      shortDescription == null ? "" : shortDescription,
+      content == null ? "" : content,
+      videoEmbed == null ? "" : videoEmbed,
+      imageUrl == null ? "" : imageUrl,
+      available == null ? false : available,
+      id
+    ];
+
+    db.run(sql, params, (err, row) => {
+      if (err) {
+        console.error(err);
+      } else {
+        // get and return the updated course
+        module.exports.course(id, (res) => {
+          cb(res);
+        });
+      }
+    });
+  },
+
   // Lookup course by id
   course: (id, cb) => {
     var sql = `SELECT id, title, url, short_description, content, video_embed, image_url, available FROM courses WHERE id = (?)`;
@@ -87,6 +122,20 @@ module.exports = {
         console.error(err);
       } else {
         cb(rows);
+      }
+    });
+  },
+
+  // Delete course by id
+  deleteCourse: (id, cb) => {
+    var sql = `DELETE FROM courses WHERE id = (?)`;
+
+    db.run(sql, [id], (err, row) => {
+      if (err) {
+        console.error(err);
+        cb({"success": false});
+      } else {
+        cb({"success": true});
       }
     });
   },
@@ -117,11 +166,46 @@ module.exports = {
       if (err) {
         console.error(err);
       } else {
-        // get the id of the inserted course
+        // get the id of the inserted lesson
         db.get("SELECT last_insert_rowid() as id", function (err, row) {
           module.exports.lesson(row["id"], (res) => {
             cb(res);
           });
+        });
+      }
+    });
+  },
+
+  // Update a lesson
+  updateLesson: ({ id, title, url, shortDescription, content, videoEmbed, imageUrl, available }, cb) => {
+    var sql = `UPDATE lessons SET
+          title = ?,
+          url = ?, 
+          short_description = ?, 
+          content = ?, 
+          video_embed = ?, 
+          image_url = ?, 
+          available = ?
+        WHERE id = ?`;
+
+    var params = [
+      title,
+      url == null ? "" : url,
+      shortDescription == null ? "" : shortDescription,
+      content == null ? "" : content,
+      videoEmbed == null ? "" : videoEmbed,
+      imageUrl == null ? "" : imageUrl,
+      available == null ? false : available,
+      id
+    ];
+
+    db.run(sql, params, (err, row) => {
+      if (err) {
+        console.error(err);
+      } else {
+        // get and return the updated lesson
+        module.exports.lesson(id, (res) => {
+          cb(res);
         });
       }
     });
@@ -149,6 +233,20 @@ module.exports = {
         console.error(err);
       } else {
         cb(rows);
+      }
+    });
+  },
+
+  // Delete lesson by id
+  deleteLesson: (id, cb) => {
+    var sql = `DELETE FROM lessons WHERE id = (?)`;
+
+    db.run(sql, [id], (err, row) => {
+      if (err) {
+        console.error(err);
+        cb({"success": false});
+      } else {
+        cb({"success": true});
       }
     });
   },
