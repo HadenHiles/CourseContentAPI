@@ -46,3 +46,15 @@ mutation {
   }
 }
 ```
+
+### Supported Queries/Mutations
+- course(id)
+- courses
+- createCourse(title, url, shortDescription, content, videoEmbed,imageUrl, available)
+- updateCourse(id, title, url, shortDescription, content, videoEmbed,imageUrl, available)
+- deleteCourse(id)
+- lesson(id)
+- lessons
+- createLesson(title, url, shortDescription, content, videoEmbed,imageUrl, available)
+- updateLesson(id, title, url, shortDescription, content, videoEmbed,imageUrl, available)
+- deleteLesson(id)
